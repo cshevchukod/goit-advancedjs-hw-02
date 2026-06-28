@@ -12,11 +12,11 @@
 
 /* Sections style */
 @import url('./header.css');
-@import url('./vite-promo.css');
-@import url('./badges.css');
+/* @import url('./vite-promo.css'); */
+/* @import url('./badges.css'); */
 @import url('./back-link.css');
 @import url('./footer.css');
 
 /* Tasks */
-/* @import url('./1-gallery.css');*/
-/* @import url('./2-form.css');*/
+@import url('./1-timer.css');
+@import url('./2-snackbar.css');

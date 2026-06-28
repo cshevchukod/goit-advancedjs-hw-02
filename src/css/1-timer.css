@@ -1,0 +1,59 @@
+.timer-section {
+  padding-top: 36px;
+}
+
+.timer-section .container {
+  max-width: 1128px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.timer-section .back-link {
+  display: inline-block;
+  margin-bottom: 32px;
+}
+
+.timer-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+#datetime-picker {
+  box-sizing: border-box;
+  width: 272px;
+  height: 32px;
+  padding: 4px 16px;
+}
+
+button[data-start] {
+  box-sizing: border-box;
+  min-width: 75px;
+  height: 32px;
+  padding: 4px 16px;
+}
+
+button[data-start]:disabled,
+#datetime-picker:disabled {
+  cursor: not-allowed;
+}
+
+.timer {
+  display: flex;
+  gap: 24px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.value {
+  font-weight: 700;
+}
+
+.label {
+  text-transform: uppercase;
+}
