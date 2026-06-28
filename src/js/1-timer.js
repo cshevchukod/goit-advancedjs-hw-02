@@ -26,6 +26,12 @@ flatpickr(input, {
   onClose(selectedDates) {
     userSelectedDate = selectedDates[0];
 
+    if (!userSelectedDate) {
+      startBtn.disabled = true;
+      updateTimer(0);
+      return;
+    }
+
     if (userSelectedDate <= new Date()) {
       startBtn.disabled = true;
 
@@ -33,13 +39,27 @@ flatpickr(input, {
         message: 'Please choose a date in the future',
         position: 'topRight',
       });
-    } else {
-      startBtn.disabled = false;
+
+      return;
     }
+
+    startBtn.disabled = false;
   },
 });
 
 startBtn.addEventListener('click', () => {
+  if (!userSelectedDate || userSelectedDate <= new Date()) {
+    startBtn.disabled = true;
+    updateTimer(0);
+
+    iziToast.error({
+      message: 'Please choose a date in the future',
+      position: 'topRight',
+    });
+
+    return;
+  }
+
   startBtn.disabled = true;
   input.disabled = true;
 
@@ -73,6 +93,10 @@ function addLeadingZero(value) {
 }
 
 function convertMs(ms) {
+  if (!Number.isFinite(ms) || ms < 0) {
+    return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  }
+
   const second = 1000;
   const minute = second * 60;
   const hour = minute * 60;
