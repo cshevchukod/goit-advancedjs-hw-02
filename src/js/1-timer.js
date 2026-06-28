@@ -12,8 +12,8 @@ const hoursEl = document.querySelector('[data-hours]');
 const minutesEl = document.querySelector('[data-minutes]');
 const secondsEl = document.querySelector('[data-seconds]');
 
-let userSelectedDate;
-let intervalId;
+let userSelectedDate = null;
+let intervalId = null;
 
 startBtn.disabled = true;
 
@@ -26,8 +26,9 @@ flatpickr(input, {
   onClose(selectedDates) {
     userSelectedDate = selectedDates[0];
 
-    if (!userSelectedDate) {
+    if (!isValidDate(userSelectedDate)) {
       startBtn.disabled = true;
+      userSelectedDate = null;
       updateTimer(0);
       return;
     }
@@ -47,9 +48,18 @@ flatpickr(input, {
   },
 });
 
-startBtn.addEventListener('click', () => {
-  if (!userSelectedDate || userSelectedDate <= new Date()) {
+input.addEventListener('input', () => {
+  if (input.value.trim() === '') {
+    userSelectedDate = null;
     startBtn.disabled = true;
+    updateTimer(0);
+  }
+});
+
+startBtn.addEventListener('click', () => {
+  if (!isValidDate(userSelectedDate) || userSelectedDate <= new Date()) {
+    startBtn.disabled = true;
+    userSelectedDate = null;
     updateTimer(0);
 
     iziToast.error({
@@ -78,6 +88,10 @@ startBtn.addEventListener('click', () => {
     updateTimer(difference);
   }, 1000);
 });
+
+function isValidDate(date) {
+  return date instanceof Date && !Number.isNaN(date.getTime());
+}
 
 function updateTimer(ms) {
   const time = convertMs(ms);
