@@ -43,6 +43,8 @@ startBtn.addEventListener('click', () => {
   startBtn.disabled = true;
   input.disabled = true;
 
+  updateTimer(userSelectedDate - Date.now());
+
   intervalId = setInterval(() => {
     const difference = userSelectedDate - Date.now();
 
